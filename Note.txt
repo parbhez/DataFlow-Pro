@@ -1,0 +1,17 @@
+Specific Route List command using filter
+php artisan route:list --name=offers
+
+for Image: 
+
+package: https://spatie.be/docs/laravel-medialibrary/v10
+
+
+if you did not find storage image then run this command
+php artisan storage:link
+
+Package install
+
+composer require spatie/laravel-medialibrary
+composer require carlos-meneses/laravel-mpdf
+composer require maatwebsite/excel
+composer require phpoffice/phpspreadsheet

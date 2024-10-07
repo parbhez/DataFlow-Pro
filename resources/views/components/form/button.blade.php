@@ -1,0 +1,2 @@
+@props(['title', 'type', 'id', 'name'])
+<button {{ $attributes->class(['text-white duration-500 bg-green-500 rounded shadow hover:bg-green-800']) }} type="{{ $type ?? 'submit' }}" name="{{ $name ?? '' }}" id="{{ $id ?? '' }}">{{ $title ?? 'Submit' }}</button>
