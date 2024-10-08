@@ -14,6 +14,40 @@ This Laravel CRUD system is designed to provide an efficient and user-friendly e
 -   **Pagination and Limiting:** Well-organized pagination to manage large datasets efficiently and row limits.
 -   **Query Parameters Handling:** Efficiently manage query parameters to avoid common problems.
 
+## Project Screenshots
+
+### Create
+
+![Create](screenshots/create.png)
+
+### Offers Management
+
+![Offers](screenshots/list.png)
+
+### Update
+
+![Update](screenshots/update.png)
+
+### Filter Multiple
+
+![Filter](screenshots/filter-multiple.png)
+
+### Export
+
+![Export](screenshots/exportpng.png)
+
+### Import
+
+![Import](screenshots/import.png)
+
+### PDF
+
+![PDF](screenshots/PDF.png)
+
+### Global Search
+
+![GlobalSearch](screenshots/global.png)
+
 ## Best Practices:
 
 This application adheres to Laravel best practices, providing a solid foundation for building similar applications.
@@ -33,16 +67,19 @@ To get started with this project, follow these steps:
 2. **Install Dependencies:**
    composer install
 
-3. **Create a .env File:**
+3. **NPM Install Dependencies:**
+   npm install
+
+4. **Create a .env File:**
    cp .env.example .env
 
-4. **Generate Application Key:**
+5. **Generate Application Key:**
    php artisan key:generate
 
-5. **Run Migrations:**
+6. **Run Migrations:**
    php artisan migrate
 
-6. **Set Up Database: Update your .env file with your database credentials:**
+7. **Set Up Database: Update your .env file with your database credentials:**
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
@@ -50,15 +87,15 @@ To get started with this project, follow these steps:
    DB_USERNAME=your_username
    DB_PASSWORD=your_password
 
-7. **Seed the Database (optional): If you have seeders, run:**
+8. **Seed the Database (optional): If you have seeders, run:**
    php artisan db:seed
 
-8. **Database Backup(optional): If you have no seeders, then import db:**
+9. **Database Backup(optional): If you have no seeders, then import db:**
    "I have exported the database into a folder named 'DB Backup.' Anyone can import the database without having to run seeders."
 
-9. **Default Login Credentials**
-   Email: admin@gmail.com
-   Password: password
+10. **Default Login Credentials**
+    Email: admin@gmail.com
+    Password: password
 
 ### Instructions
 

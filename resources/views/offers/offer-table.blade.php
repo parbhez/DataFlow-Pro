@@ -14,7 +14,7 @@
 
         @foreach($offers as $key=>$offer)
         <tr>
-            <td>{{ $offer->id }} - {{ ($offers->perPage() * ($offers->currentPage() - 1)) + ($key + 1) }}</td>
+            <td>{{ ($offers->perPage() * ($offers->currentPage() - 1)) + ($key + 1) }}</td>
 
             <td>
                 <img src="{{ asset($offer->author->image_url) }}" alt="Avatar" class="rounded-circle" /> <strong>{{ $offer->author->name}}</strong>

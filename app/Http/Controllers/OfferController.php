@@ -18,36 +18,6 @@ use Illuminate\Support\Facades\Log;
 class OfferController extends Controller
 {
 
-    public function BulkImportOffer(Request $request)
-    {
-        // Validate the uploaded file
-        $request->validate([
-            //'file' => 'required|mimes:xlsx,xls|max:10240', // File must be xlsx or xls, max size 10MB
-            'file' => 'required|max:10240', // File must be xlsx or xls, max size 10MB
-        ]);
-
-        $file = $request->file('file');
-
-        // Ensure the file is an Excel file
-        if (!in_array($file->getClientOriginalExtension(), ['xlsx', 'xls'])) {
-            return redirect()->back()->with('error', 'Please upload a valid Excel file xlsx,xls .');
-        }
-
-        try {
-            // Upload images and get their filenames
-            $imageFilenames = Common::fileUpload($file);
-
-            // Pass the image filenames to the import class
-            Excel::import(new OffersImport($imageFilenames), $file);
-
-            Log::info('Offers imported successfully');
-
-            return redirect()->back()->with('success', 'Offers imported successfully!');
-        } catch (\Exception $e) {
-            Log::error('Excel import failed: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Something went wrong. Please try again.');
-        }
-    }
 
     /**
      * Display a listing of the resource.
@@ -193,7 +163,60 @@ class OfferController extends Controller
     }
 
     /**
-     * selected offer wise generate pdf file
+     * Bulk import offers from an Excel file.
+     *
+     * This method handles the validation of the uploaded file, checks if the file is an Excel file
+     * (either .xlsx or .xls), and processes the file to import offers. The method also logs any errors
+     * that occur during the process.
+     *
+     * @param  \Illuminate\Http\Request  $request  The incoming HTTP request.
+     * 
+     * @return \Illuminate\Http\RedirectResponse  Redirects back with a success or error message.
+     */
+    public function BulkImportOffer(Request $request)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            //'file' => 'required|mimes:xlsx,xls|max:10240', // File must be xlsx or xls, max size 10MB
+            'file' => 'required|max:10240', // File must be xlsx or xls, max size 10MB
+        ]);
+
+        $file = $request->file('file');
+
+        // Ensure the file is an Excel file
+        if (!in_array($file->getClientOriginalExtension(), ['xlsx', 'xls'])) {
+            return redirect()->back()->with('error', 'Please upload a valid Excel file xlsx,xls .');
+        }
+
+        try {
+            // Upload images and get their filenames
+            $imageFilenames = Common::fileUpload($file);
+
+            // Pass the image filenames to the import class
+            Excel::import(new OffersImport($imageFilenames), $file);
+
+            Log::info('Offers imported successfully');
+
+            return redirect()->back()->with('success', 'Offers imported successfully!');
+        } catch (\Exception $e) {
+            Log::error('Excel import failed: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong. Please try again.');
+        }
+    }
+
+
+    /**
+     * Generate a PDF for offers.
+     *
+     * This method retrieves offers based on the current user's role (admin or regular user),
+     * generates a PDF using the retrieved offers, and renders the PDF for download.
+     * Admin users retrieve all offers, while non-admin users retrieve only their offers.
+     * The PDF is generated using the mPDF library and is immediately served for download.
+     *
+     * @param  \Illuminate\Http\Request  $request  The incoming HTTP request.
+     * @param  OfferService  $offerService  The service class responsible for fetching the offers.
+     *
+     * @return \Illuminate\Http\Response|mixed  Returns the generated PDF or redirects with an error message in case of failure.
      */
     public function generateOfferPdf(Request $request, OfferService $offerService)
     {
@@ -219,7 +242,20 @@ class OfferController extends Controller
         }
     }
 
-
+    /**
+     * Generate an Excel file for offers.
+     *
+     * This method retrieves offers based on the current user's role (admin or regular user),
+     * generates an Excel file using the retrieved offers, and serves the file for download.
+     * Admin users retrieve all offers, while non-admin users retrieve only their offers.
+     * The Excel file is generated using the Laravel Excel package.
+     *
+     * @param  \Illuminate\Http\Request  $request  The incoming HTTP request.
+     * @param  OfferService  $offerService  The service class responsible for fetching the offers.
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|mixed  Returns the generated Excel file as a download, 
+     *         or redirects with an error message in case of failure.
+     */
     public function generateOfferExcel(Request $request, OfferService $offerService)
     {
 
