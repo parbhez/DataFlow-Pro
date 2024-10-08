@@ -22,7 +22,7 @@ This Laravel CRUD system is designed to provide an efficient and user-friendly e
 
 ### Offers Management
 
-![Offers](screenshots/list.png)
+![Offers](screenshots/List.png)
 
 ### Update
 
@@ -38,7 +38,7 @@ This Laravel CRUD system is designed to provide an efficient and user-friendly e
 
 ### Import
 
-![Import](screenshots/import.png)
+![Import](screenshots/Import.png)
 
 ### PDF
 
